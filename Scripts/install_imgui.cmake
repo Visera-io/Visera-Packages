@@ -11,7 +11,7 @@ set_target_properties(ImGui PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY "${VISERA_PACKAGES_INSTALL_DIR}/ImGui"
 )
 target_compile_definitions(
-    ImGui PRIVATE 
+    ImGui PRIVATE
     IMGUI_IMPL_VULKAN_USE_VOLK
     IMGUI_IMPL_VULKAN_NO_PROTOTYPES)
 
