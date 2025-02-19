@@ -27,21 +27,23 @@ macro(link_tbb _target)
     set(TBB_DIR "${TBB_INSTALL_PATH}/oneapi-tbb-${TBB_VERSION}/lib/cmake/tbb")
     find_package(TBB REQUIRED)
 
-    target_link_libraries(${PROJECT_NAME} PUBLIC TBB::tbb)
-    target_link_libraries(${PROJECT_NAME} PUBLIC TBB::tbbmalloc)
+    target_link_libraries(${_target}
+        INTERFACE
+        TBB::tbb
+        TBB::tbbmalloc)
     
     add_custom_command(
-        TARGET ${PROJECT_NAME}
+        TARGET ${_target}
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:TBB::tbb>
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+        $<TARGET_FILE_DIR:${APP_NAME}>
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:TBB::tbbmalloc>
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+        $<TARGET_FILE_DIR:${APP_NAME}>
         #"tbb12_debug.dll" conflicts with embree's dependency name "tbb12.dll"
         COMMAND ${CMAKE_COMMAND} -E rename
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>/$<TARGET_FILE_NAME:TBB::tbb>
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>/tbb12.dll
+        $<TARGET_FILE_DIR:${APP_NAME}>/$<TARGET_FILE_NAME:TBB::tbb>
+        $<TARGET_FILE_DIR:${APP_NAME}>/tbb12.dll
     )
 endmacro()

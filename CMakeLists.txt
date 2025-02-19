@@ -1,28 +1,34 @@
 cmake_minimum_required(VERSION 3.21.0 FATAL_ERROR)
-set(VISERA_PACKAGES_CACHE_DIR    "${CMAKE_SOURCE_DIR}/.Cache")
-set(VISERA_PACKAGES_VCPKG_DIR    "${CMAKE_SOURCE_DIR}/Vcpkg")
-set(VISERA_PACKAGES_SCRIPTS_DIR  "${CMAKE_SOURCE_DIR}/Scripts")
-set(VISERA_PACKAGES_INSTALL_DIR  "${CMAKE_SOURCE_DIR}/Install")
-set(VISERA_PACKAGES_SOURCE_DIR   "${CMAKE_SOURCE_DIR}/Source")
 
-set(CMAKE_TOOLCHAIN_FILE "${VISERA_PACKAGES_VCPKG_DIR}/scripts/buildsystems/vcpkg.cmake")
+set(VISERA_PACKAGES "Visera-Packages")
 
-#<< Install/Download Packages >>
-list(APPEND CMAKE_MODULE_PATH "${VISERA_PACKAGES_SCRIPTS_DIR}")
-include(install_all)
-
-project("Visera-Packages"
+project(${VISERA_PACKAGES}
     HOMEPAGE_URL    "www.visera.io"
+    LANGUAGES       CXX
 )
 
-option(bCleanCache "Clean cache after installation" ON)
+option(bUpdateVcpkg     "Automatically update Vcpkg"        ON)
+option(bCleanCache      "Clean cache after installation"    ON)
 
-add_executable(${PROJECT_NAME} "Test/Main.cpp")
-link_all(${PROJECT_NAME})
+if(NOT DEFINED VISERA)
+    message(FATAL_ERROR "Invalid Visera Engine!")
+endif()
 
-#<< Post Processes >>
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER "Visera/Packages")
+set(VISERA_PACKAGES_ROOT_DIR     "${PROJECT_SOURCE_DIR}"               CACHE STRING "")
+set(VISERA_PACKAGES_CACHE_DIR    "${VISERA_PACKAGES_ROOT_DIR}/.Cache"  CACHE STRING "")
+set(VISERA_PACKAGES_VCPKG_DIR    "${VISERA_PACKAGES_ROOT_DIR}/Vcpkg"   CACHE STRING "")
+set(VISERA_PACKAGES_SCRIPTS_DIR  "${VISERA_PACKAGES_ROOT_DIR}/Scripts" CACHE STRING "")
+set(VISERA_PACKAGES_INSTALL_DIR  "${VISERA_PACKAGES_ROOT_DIR}/Install" CACHE STRING "")
+set(VISERA_PACKAGES_SOURCE_DIR   "${VISERA_PACKAGES_ROOT_DIR}/Source"  CACHE STRING "")
+
+list(APPEND CMAKE_MODULE_PATH "${VISERA_PACKAGES_SCRIPTS_DIR}")
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE)
+
+#add_custom_target(${VISERA_PACKAGES} ALL)
+
+if(${bUpdateVcpkg})
+    include(install_vcpkg)
+endif()
 
 if (${bCleanCache})
     message(STATUS "\nVisera Packages is cleaning cache...")

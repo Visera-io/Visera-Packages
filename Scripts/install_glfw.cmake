@@ -9,12 +9,12 @@ macro(link_glfw _target)
     message(STATUS "Loading GLFW3 (glfw)")
     find_package(glfw3 REQUIRED)
 
-    target_link_libraries(${PROJECT_NAME} PUBLIC glfw)
+    target_link_libraries(${_target} PUBLIC glfw)
     add_custom_command(
-        TARGET ${PROJECT_NAME}
+        TARGET ${_target}
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:glfw>
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+        $<TARGET_FILE_DIR:${APP_NAME}>
     )
 endmacro()

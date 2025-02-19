@@ -30,10 +30,10 @@ macro(link_embree _target)
     target_link_libraries(${_target} PUBLIC embree)
 
     add_custom_command(
-        TARGET ${PROJECT_NAME}
+        TARGET ${_target}
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:embree>
-        $<TARGET_FILE_DIR:${PROJECT_NAME}>
+        $<TARGET_FILE_DIR:${APP_NAME}>
     )
 endmacro()

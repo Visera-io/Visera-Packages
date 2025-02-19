@@ -14,5 +14,5 @@ macro(link_slang _target)
         PROPERTIES
         IMPORTED_LOCATION "$ENV{VULKAN_SDK}/Lib/slang.lib"
         INTERFACE_INCLUDE_DIRECTORIES "$ENV{VULKAN_SDK}/Include/slang")
-    target_link_libraries(${PROJECT_NAME} INTERFACE slang)
+    target_link_libraries(${_target} PUBLIC slang)
 endmacro()

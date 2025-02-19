@@ -9,5 +9,5 @@ execute_process(COMMAND ${VISERA_PACKAGES_VCPKG_EXE} install vulkan-memory-alloc
 macro(link_vma _target)
     message(STATUS "Loading VMA (GPUOpen::VulkanMemoryAllocator)...")
     FIND_PACKAGE(VulkanMemoryAllocator CONFIG REQUIRED)
-    target_link_libraries(${PROJECT_NAME} PUBLIC GPUOpen::VulkanMemoryAllocator)
+    target_link_libraries(${_target} PUBLIC GPUOpen::VulkanMemoryAllocator)
 endmacro()
