@@ -17,9 +17,9 @@ macro(link_freeimage _target)
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:freeimage::FreeImage>
-        $<TARGET_FILE_DIR:${APP_NAME}>
+        $<TARGET_FILE_DIR:${VISERA_APP}>
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:freeimage::FreeImagePlus>
-        $<TARGET_FILE_DIR:${APP_NAME}>
+        $<TARGET_FILE_DIR:${VISERA_APP}>
     )
 endmacro()

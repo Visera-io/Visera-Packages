@@ -15,13 +15,13 @@ macro(link_spdlog _target)
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:spdlog::spdlog>
-        $<TARGET_FILE_DIR:${APP_NAME}>
+        $<TARGET_FILE_DIR:${VISERA_APP}>
     )
     add_custom_command(
         TARGET ${_target}
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:fmt::fmt>
-        $<TARGET_FILE_DIR:${APP_NAME}>
+        $<TARGET_FILE_DIR:${VISERA_APP}>
     )
 endmacro()

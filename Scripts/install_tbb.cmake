@@ -37,13 +37,13 @@ macro(link_tbb _target)
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:TBB::tbb>
-        $<TARGET_FILE_DIR:${APP_NAME}>
+        $<TARGET_FILE_DIR:${VISERA_APP}>
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:TBB::tbbmalloc>
-        $<TARGET_FILE_DIR:${APP_NAME}>
+        $<TARGET_FILE_DIR:${VISERA_APP}>
         #"tbb12_debug.dll" conflicts with embree's dependency name "tbb12.dll"
         COMMAND ${CMAKE_COMMAND} -E rename
-        $<TARGET_FILE_DIR:${APP_NAME}>/$<TARGET_FILE_NAME:TBB::tbb>
-        $<TARGET_FILE_DIR:${APP_NAME}>/tbb12.dll
+        $<TARGET_FILE_DIR:${VISERA_APP}>/$<TARGET_FILE_NAME:TBB::tbb>
+        $<TARGET_FILE_DIR:${VISERA_APP}>/tbb12.dll
     )
 endmacro()

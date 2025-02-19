@@ -34,6 +34,6 @@ macro(link_embree _target)
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:embree>
-        $<TARGET_FILE_DIR:${APP_NAME}>
+        $<TARGET_FILE_DIR:${VISERA_APP}>
     )
 endmacro()
