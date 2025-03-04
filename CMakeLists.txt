@@ -8,10 +8,10 @@ project(${VISERA_PACKAGES}
 )
 
 option(bUpdateVcpkg     "Automatically update Vcpkg"        ON)
-option(bCleanCache      "Clean cache after installation"    ON)
+option(bCleanCache      "Clean cache after installation"    OFF)
 
 set(VISERA_PACKAGES_ROOT_DIR     "${PROJECT_SOURCE_DIR}"               CACHE STRING "")
-set(VISERA_PACKAGES_CACHE_DIR    "${VISERA_PACKAGES_ROOT_DIR}/.Cache"  CACHE STRING "")
+set(VISERA_PACKAGES_CACHE_DIR    "${VISERA_PACKAGES_ROOT_DIR}/Cache"   CACHE STRING "")
 set(VISERA_PACKAGES_VCPKG_DIR    "${VISERA_PACKAGES_ROOT_DIR}/Vcpkg"   CACHE STRING "")
 set(VISERA_PACKAGES_SCRIPTS_DIR  "${VISERA_PACKAGES_ROOT_DIR}/Scripts" CACHE STRING "")
 set(VISERA_PACKAGES_INSTALL_DIR  "${VISERA_PACKAGES_ROOT_DIR}/Install" CACHE STRING "")
@@ -25,7 +25,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE)
 if(${bUpdateVcpkg})
     include(install_vcpkg)
 else()
-    message(FATAL_ERROR "SSS????")
+    message(FATAL_ERROR "WIP")
 endif()
 
 if (${bCleanCache})
