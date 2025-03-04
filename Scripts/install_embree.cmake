@@ -1,6 +1,6 @@
 set(EMBREE_VERSION "4.3.3")
-set(EMBREE_URL "https://github.com/RenderKit/embree/releases/download/v${EMBREE_VERSION}/embree-${EMBREE_VERSION}.x64.windows.zip")
-set(EMBREE_CACHE_PATH "${VISERA_PACKAGES_CACHE_DIR}/Embree.zip")
+
+set(EMBREE_CACHE_PATH "${VISERA_PACKAGES_CACHE_DIR}")
 set(EMBREE_INSTALL_PATH "${VISERA_PACKAGES_INSTALL_DIR}/Embree")
 
 add_custom_target(Embree4)
@@ -8,16 +8,28 @@ target_sources(Embree4 PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_embree.cm
 set_target_properties(Embree4 PROPERTIES FOLDER "Visera/Packages/Embree4")
 
 # Check if installed
-if (NOT EXISTS ${EMBREE_INSTALL_PATH})
+if (NOT EXISTS "${EMBREE_INSTALL_PATH}/lib/cmake/embree-${EMBREE_VERSION}")
     message(STATUS "Installing Embree${EMBREE_VERSION} (embree)...")
     # Check if exist cache
-    if (NOT EXISTS ${EMBREE_CACHE_PATH})
-        message(STATUS "Cache is not found and start downloading...")
-        file(DOWNLOAD ${EMBREE_URL} ${EMBREE_CACHE_PATH} SHOW_PROGESS)
+    if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
+        set(EMBREE_CACHE "${EMBREE_CACHE_PATH}/embree-${EMBREE_VERSION}.x64.windows.zip")
+    elseif (CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin") # MacOS
+        set(EMBREE_CACHE "${EMBREE_CACHE_PATH}/embree-${EMBREE_VERSION}.arm64.macosx.zip")
+    elseif (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+        set(EMBREE_CACHE "${EMBREE_CACHE_PATH}/embree-${EMBREE_VERSION}.x86_64.linux.tar.gz")
+    else()
+        message(FATAL_ERROR "Unsupported Platform!")
     endif()
 
+    if (NOT DEFINED EMBREE_CACHE)
+        message(FATAL_ERROR "Cache is not found and start downloading... (WIP)")
+        #set(EMBREE_URL "https://github.com/RenderKit/embree/releases/download/v${EMBREE_VERSION}/embree-${EMBREE_VERSION}.x64.windows.zip")
+        #file(DOWNLOAD ${EMBREE_URL} ${EMBREE_CACHE_PATH} SHOW_PROGESS)
+    endif()
+
+    message(STATUS "Found Embree${EMBREE_VERSION} Cache: ${EMBREE_CACHE}")
     file(ARCHIVE_EXTRACT
-        INPUT ${EMBREE_CACHE_PATH}
+        INPUT ${EMBREE_CACHE}
         DESTINATION ${EMBREE_INSTALL_PATH})
 endif()
 
