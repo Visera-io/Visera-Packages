@@ -23,6 +23,14 @@ set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" PARENT_SCOPE)
 #add_custom_target(${VISERA_PACKAGES} ALL)
 
 if(${bUpdateVcpkg})
+#    execute_process(
+#            COMMAND git submodule update --init --recursive
+#            WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+#    )
+#    execute_process(
+#            COMMAND git pull --recurse-submodules
+#            WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+#    )
     include(install_vcpkg)
 else()
     message(FATAL_ERROR "WIP")
