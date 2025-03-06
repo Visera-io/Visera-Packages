@@ -1,4 +1,4 @@
-message(STATUS "Installing Volk (volk::volk)...")
+message(STATUS "Installing Eigen3 (Eigen3::Eigen)...")
 
 add_custom_target(Eigen)
 target_sources(Eigen PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_eigen.cmake")

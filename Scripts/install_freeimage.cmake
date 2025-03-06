@@ -1,4 +1,4 @@
-message(STATUS "Installing FreeImage (FreeImage::volk_headers)...")
+message(STATUS "Installing FreeImage (FreeImage::FreeImage)...")
 
 add_custom_target(FreeImage)
 target_sources(FreeImage PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_freeimage.cmake")

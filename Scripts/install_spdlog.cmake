@@ -1,4 +1,4 @@
-message(STATUS "Installing Spdlog (Spdlog::volk_headers)...")
+message(STATUS "Installing Spdlog (spdlog::spdlog)...")
 
 add_custom_target(Spdlog)
 target_sources(Spdlog PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_spdlog.cmake")

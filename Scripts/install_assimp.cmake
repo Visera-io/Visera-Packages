@@ -1,4 +1,4 @@
-message(STATUS "Installing Assimp (volk::volk_headers)...")
+message(STATUS "Installing Assimp (assimp::assimp)...")
 
 add_custom_target(Assimp)
 target_sources(Assimp PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_assimp.cmake")

@@ -1,4 +1,4 @@
-message(STATUS "Installing RapidJSON (RapidJSON::volk_headers)...")
+message(STATUS "Installing RapidJSON (rapidjson)...")
 
 add_custom_target(RapidJSON)
 target_sources(RapidJSON PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_rapidjson.cmake")

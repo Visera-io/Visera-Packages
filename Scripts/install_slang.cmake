@@ -1,10 +1,10 @@
-message(STATUS "Installing Slang (Slang::volk_headers)...")
+message(STATUS "Installing Slang (slang)...")
 
 add_custom_target(Slang)
 target_sources(Slang PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_slang.cmake")
 set_target_properties(Slang PROPERTIES FOLDER "Visera/Packages/Slang")
 
-execute_process(COMMAND ${VISERA_PACKAGES_VCPKG_EXE} install Slang)
+#execute_process(COMMAND ${VISERA_PACKAGES_VCPKG_EXE} install Slang)
 
 macro(link_slang _target)
     message(STATUS "\nLoading Slang (slang)")
