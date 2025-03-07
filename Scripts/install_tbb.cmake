@@ -10,11 +10,11 @@ set_target_properties(TBB PROPERTIES FOLDER "Visera/Packages/TBB")
 if (NOT EXISTS "${TBB_INSTALL_PATH}/oneapi-tbb-${TBB_VERSION}/lib/cmake/tbb")
     message(STATUS "Installing TBB${TBB_VERSION} (TBB)...")
     # Check if exist cache
-    if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
+    if (WINDOWS)
         set(TBB_CACHE "${TBB_CACHE_PATH}/oneapi-tbb-${TBB_VERSION}-win.zip")
-    elseif (CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin") # MacOS
+    elseif (APPLE) # MacOS
         set(TBB_CACHE "${TBB_CACHE_PATH}/oneapi-tbb-${TBB_VERSION}-mac.tgz")
-    elseif (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+    elseif (LINUX)
         set(TBB_CACHE "${TBB_CACHE_PATH}/oneapi-tbb-${TBB_VERSION}-lin.tgz")
     else()
         message(FATAL_ERROR "Unsupported Platform!")

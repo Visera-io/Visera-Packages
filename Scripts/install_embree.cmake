@@ -11,11 +11,11 @@ set_target_properties(Embree4 PROPERTIES FOLDER "Visera/Packages/Embree4")
 if (NOT EXISTS "${EMBREE_INSTALL_PATH}/lib/cmake/embree-${EMBREE_VERSION}")
     message(STATUS "Installing Embree${EMBREE_VERSION} (embree)...")
     # Check if exist cache
-    if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
+    if (WINDOWS)
         set(EMBREE_CACHE "${EMBREE_CACHE_PATH}/embree-${EMBREE_VERSION}.x64.windows.zip")
-    elseif (CMAKE_HOST_SYSTEM_NAME STREQUAL "Darwin") # MacOS
+    elseif (APPLE) # MacOS
         set(EMBREE_CACHE "${EMBREE_CACHE_PATH}/embree-${EMBREE_VERSION}.arm64.macosx.zip")
-    elseif (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
+    elseif (LINUX)
         set(EMBREE_CACHE "${EMBREE_CACHE_PATH}/embree-${EMBREE_VERSION}.x86_64.linux.tar.gz")
     else()
         message(FATAL_ERROR "Unsupported Platform!")

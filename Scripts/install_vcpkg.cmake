@@ -4,7 +4,7 @@ set_target_properties(Vcpkg PROPERTIES FOLDER "Visera/Packages/Vcpkg")
 
 message(STATUS "Installing Vcpkg...")
 
-if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
+if (WINDOWS)
     set(VISERA_PACKAGES_VCPKG_EXE "${VISERA_PACKAGES_VCPKG_DIR}/vcpkg.exe" CACHE PATH "")
     if (NOT EXISTS "${VISERA_PACKAGES_VCPKG_EXE}")
         execute_process(
