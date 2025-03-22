@@ -11,7 +11,7 @@ set_target_properties(Embree4 PROPERTIES FOLDER "Visera/Packages/Embree4")
 if (NOT EXISTS "${EMBREE_INSTALL_PATH}/lib/cmake/embree-${EMBREE_VERSION}")
     message(STATUS "Installing Embree${EMBREE_VERSION} (embree)...")
     # Check if exist cache
-    if (WINDOWS)
+    if (WIN32)
         set(EMBREE_CACHE "${EMBREE_CACHE_PATH}/embree-${EMBREE_VERSION}.x64.windows.zip")
     elseif (APPLE) # MacOS
         set(EMBREE_CACHE "${EMBREE_CACHE_PATH}/embree-${EMBREE_VERSION}.arm64.macosx.zip")

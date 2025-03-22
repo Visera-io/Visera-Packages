@@ -10,7 +10,7 @@ macro(link_slang _target)
     message(STATUS "\nLoading Slang (slang)")
     # Make sure that Version(VulkanSDK) >= "1.4.0"
     add_library(slang UNKNOWN IMPORTED)
-    if (WINDOWS)
+    if (WIN32)
         set_target_properties(slang
                 PROPERTIES
                 IMPORTED_LOCATION "$ENV{VULKAN_SDK}/Lib/slang.lib"

@@ -10,7 +10,7 @@ set_target_properties(TBB PROPERTIES FOLDER "Visera/Packages/TBB")
 if (NOT EXISTS "${TBB_INSTALL_PATH}/oneapi-tbb-${TBB_VERSION}/lib/cmake/tbb")
     message(STATUS "Installing TBB${TBB_VERSION} (TBB)...")
     # Check if exist cache
-    if (WINDOWS)
+    if (WIN32)
         set(TBB_CACHE "${TBB_CACHE_PATH}/oneapi-tbb-${TBB_VERSION}-win.zip")
     elseif (APPLE) # MacOS
         set(TBB_CACHE "${TBB_CACHE_PATH}/oneapi-tbb-${TBB_VERSION}-mac.tgz")
