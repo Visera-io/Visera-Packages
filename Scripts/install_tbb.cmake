@@ -39,7 +39,7 @@ macro(link_tbb _target)
     find_package(TBB REQUIRED)
 
     target_link_libraries(${_target}
-        INTERFACE
+        PUBLIC
         TBB::tbb
         TBB::tbbmalloc)
     
@@ -53,8 +53,8 @@ macro(link_tbb _target)
         $<TARGET_FILE:TBB::tbbmalloc>
         $<TARGET_FILE_DIR:${VISERA_APP}>
         #"tbb12_debug.dll" conflicts with embree's dependency name "tbb12.dll"
-        COMMAND ${CMAKE_COMMAND} -E rename
-        $<TARGET_FILE_DIR:${VISERA_APP}>/$<TARGET_FILE_NAME:TBB::tbb>
-        $<TARGET_FILE_DIR:${VISERA_APP}>/tbb12.dll
+        #COMMAND ${CMAKE_COMMAND} -E rename
+        #$<TARGET_FILE_DIR:${VISERA_APP}>/$<TARGET_FILE_NAME:TBB::tbb>
+        #$<TARGET_FILE_DIR:${VISERA_APP}>/tbb12.dll
     )
 endmacro()

@@ -10428,7 +10428,7 @@ void ImGui::ErrorCheckEndFrameFinalizeErrorTooltip()
         SameLine();
         Text("to break in item call-stack, or");
         SameLine();
-        if (SmallButton("Open FAQ->About ID Stack System") && g.PlatformIO.Platform_OpenInShellFn != NULL)
+        if (SmallButton("Open FAQ->About ID Stack OS") && g.PlatformIO.Platform_OpenInShellFn != NULL)
             g.PlatformIO.Platform_OpenInShellFn(&g, "https://github.com/ocornut/imgui/blob/master/docs/FAQ.md#qa-usage");
         EndErrorTooltip();
     }
