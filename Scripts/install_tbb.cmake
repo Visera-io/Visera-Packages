@@ -1,6 +1,4 @@
 set(TBB_VERSION "2022.0.0")
-set(TBB_CACHE_PATH   "${VISERA_PACKAGES_CACHE_DIR}")
-set(TBB_INSTALL_PATH "${VISERA_PACKAGES_INSTALL_DIR}/TBB")
 
 add_custom_target(OneTBB)
 target_sources(OneTBB PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_tbb.cmake")
@@ -11,7 +9,6 @@ execute_process(COMMAND ${VISERA_PACKAGES_VCPKG_EXE} install tbb)
 macro(link_tbb _target)
     message(STATUS "Loading Intel OneTBB${TBB_VERSION} (TBB::tbb)...")
 
-    #set(TBB_DIR "${TBB_INSTALL_PATH}/oneapi-tbb-${TBB_VERSION}/lib/cmake/tbb")
     find_package(TBB REQUIRED)
 
     target_link_libraries(${_target}
