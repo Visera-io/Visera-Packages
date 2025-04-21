@@ -1,8 +1,10 @@
-add_custom_target(Vcpkg)
-target_sources(Vcpkg PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_vcpkg.cmake")
-set_target_properties(Vcpkg PROPERTIES FOLDER "Visera/Packages/Vcpkg")
+if(NOT TARGET Vcpkg)
+    message(STATUS "Installing Vcpkg...")
 
-message(STATUS "Installing Vcpkg...")
+    add_custom_target(Vcpkg)
+    target_sources(Vcpkg PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_vcpkg.cmake")
+    set_target_properties(Vcpkg PROPERTIES FOLDER "Visera/Packages/Vcpkg")
+endif()
 
 if (WIN32)
     set(VISERA_PACKAGES_VCPKG_EXE "${VISERA_PACKAGES_VCPKG_DIR}/vcpkg.exe" CACHE PATH "")

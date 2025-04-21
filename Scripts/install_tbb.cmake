@@ -1,10 +1,14 @@
 set(TBB_VERSION "2022.0.0")
 
-add_custom_target(OneTBB)
-target_sources(OneTBB PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_tbb.cmake")
-set_target_properties(OneTBB PROPERTIES FOLDER "Visera/Packages/TBB")
+if(NOT TARGET OneTBB)
+    message(STATUS "Installing OneTBB(${TBB_VERSION} (TBB)...")
 
-execute_process(COMMAND ${VISERA_PACKAGES_VCPKG_EXE} install tbb)
+    add_custom_target(OneTBB)
+    target_sources(OneTBB PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_tbb.cmake")
+    set_target_properties(OneTBB PROPERTIES FOLDER "Visera/Packages/TBB")
+
+    execute_process(COMMAND ${VISERA_PACKAGES_VCPKG_EXE} install tbb)
+endif()
 
 macro(link_tbb _target)
     message(STATUS "Loading Intel OneTBB${TBB_VERSION} (TBB::tbb)...")
@@ -21,13 +25,9 @@ macro(link_tbb _target)
         POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:TBB::tbb>
-        $<TARGET_FILE_DIR:${VISERA_APP}>
+        $<IF:$<CONFIG:Debug>,${VISERA_APP_DEBUG_DIR},${VISERA_APP_RELEASE_DIR}>
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
         $<TARGET_FILE:TBB::tbbmalloc>
-        $<TARGET_FILE_DIR:${VISERA_APP}>
-        #"tbb12_debug.dll" conflicts with embree's dependency name "tbb12.dll"
-        #COMMAND ${CMAKE_COMMAND} -E rename
-        #$<TARGET_FILE_DIR:${VISERA_APP}>/$<TARGET_FILE_NAME:TBB::tbb>
-        #$<TARGET_FILE_DIR:${VISERA_APP}>/tbb12.dll
+        $<IF:$<CONFIG:Debug>,${VISERA_APP_DEBUG_DIR},${VISERA_APP_RELEASE_DIR}>
     )
 endmacro()

@@ -1,10 +1,12 @@
-message(STATUS "Installing RapidJSON (rapidjson)...")
+if(NOT TARGET LibPNG)
+    message(STATUS "Installing LibPNG (PNG::PNG)...")
+    
+    add_custom_target(LibPNG)
+    target_sources(LibPNG PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_libpng.cmake")
+    set_target_properties(LibPNG PROPERTIES FOLDER "Visera/Packages/LibPNG")
 
-add_custom_target(LibPNG)
-target_sources(LibPNG PRIVATE "${VISERA_PACKAGES_SCRIPTS_DIR}/install_libpng.cmake")
-set_target_properties(LibPNG PROPERTIES FOLDER "Visera/Packages/LibPNG")
-
-execute_process(COMMAND ${VISERA_PACKAGES_VCPKG_EXE} install libpng)
+    execute_process(COMMAND ${VISERA_PACKAGES_VCPKG_EXE} install libpng)
+endif()
 
 macro(link_Libpng _target)
     message(STATUS "\nLoading LibPNG (PNG::PNG)")
